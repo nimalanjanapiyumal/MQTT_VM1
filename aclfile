@@ -1,0 +1,18 @@
+# Metronia Water Services MQTT ACL
+# Least-privilege access by device role and topic.
+
+user sensor01
+topic write mws/water/plant1/tankA/quality/telemetry
+topic write mws/water/plant1/tankA/quality/alerts
+
+user operator01
+topic read mws/water/plant1/tankA/quality/#
+
+user ids01
+topic read mws/#
+topic read $SYS/#
+
+# Lab-only test identity. It may connect/read a non-operational public area only.
+# It cannot publish false telemetry to the operational topic.
+user attacker01
+topic read mws/public/#
